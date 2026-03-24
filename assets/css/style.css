@@ -314,9 +314,8 @@ h1, h2, h3 {
 }
 
 .media-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
+  columns: 3;
+  column-gap: 4px;
 }
 
 .media-item {
@@ -324,6 +323,9 @@ h1, h2, h3 {
   overflow: hidden;
   cursor: pointer;
   background: #141414;
+  break-inside: avoid;
+  margin-bottom: 4px;
+  display: block;
 }
 
 .media-item video,
@@ -780,7 +782,7 @@ h1, h2, h3 {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .media-grid {
-    grid-template-columns: repeat(2, 1fr);
+    columns: 2;
   }
 
   .project-featured {
@@ -818,8 +820,12 @@ h1, h2, h3 {
   }
 
   .media-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
+    columns: 2;
+    column-gap: 2px;
+  }
+
+  .media-item {
+    margin-bottom: 2px;
   }
 
   .hero-name {
