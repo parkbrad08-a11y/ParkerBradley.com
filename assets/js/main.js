@@ -108,19 +108,20 @@ if (contactForm) {
   });
 }
 
-// ===== VIDEO AUTOPLAY =====
+// ===== VIDEO AUTOPLAY (muted, play on scroll into view) =====
 const videoObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     const video = entry.target;
     if (entry.isIntersecting) {
-      video.play().catch(() => { video.controls = true; });
+      video.play().catch(() => {});
     } else {
       video.pause();
     }
   });
-}, { threshold: 0.25 });
+}, { threshold: 0.15 });
 
 document.querySelectorAll('video').forEach(v => {
   v.muted = true;
+  v.removeAttribute('controls');
   videoObserver.observe(v);
 });
