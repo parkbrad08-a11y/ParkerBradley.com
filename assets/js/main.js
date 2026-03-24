@@ -108,6 +108,61 @@ if (contactForm) {
   });
 }
 
+// ===== LIGHTBOX =====
+const lightbox = document.getElementById('lightbox');
+const lightboxContent = document.getElementById('lightbox-content');
+const lightboxClose = document.getElementById('lightbox-close');
+let lightboxVideo = null;
+
+function openLightbox(src, type) {
+  lightboxContent.innerHTML = '';
+  if (type === 'video') {
+    lightboxVideo = document.createElement('video');
+    lightboxVideo.src = src;
+    lightboxVideo.controls = true;
+    lightboxVideo.autoplay = true;
+    lightboxVideo.playsInline = true;
+    lightboxVideo.style.outline = 'none';
+    lightboxContent.appendChild(lightboxVideo);
+    lightboxVideo.play().catch(() => {});
+  } else {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    lightboxContent.appendChild(img);
+    lightboxVideo = null;
+  }
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+  if (lightboxVideo) {
+    lightboxVideo.pause();
+    lightboxVideo.src = '';
+    lightboxVideo = null;
+  }
+  lightboxContent.innerHTML = '';
+}
+
+document.querySelectorAll('.media-item').forEach(item => {
+  item.addEventListener('click', () => {
+    openLightbox(item.dataset.src, item.dataset.type);
+  });
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+});
+
 // ===== VIDEO AUTOPLAY (muted, play on scroll into view) =====
 const videoObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {

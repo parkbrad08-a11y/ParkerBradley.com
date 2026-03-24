@@ -74,53 +74,41 @@
     <!-- Content Reel — EJ media grid -->
     <div class="media-reel">
       <div class="media-grid">
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/cheese-fry.mp4" data-type="video">
           <video src="assets/video/cheese-fry.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Cheese Fry — Slow Motion</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/glow-night.mp4" data-type="video">
           <video src="assets/video/glow-night.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Glow Night</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/hoco.mp4" data-type="video">
           <video src="assets/video/hoco.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Homecoming Pre-Game</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/holiday-atmos.mp4" data-type="video">
           <video src="assets/video/holiday-atmos.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Holiday Atmosphere</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/golf-classic.mp4" data-type="video">
           <video src="assets/video/golf-classic.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Joe's Golf Classic</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/kids-carnival.mp4" data-type="video">
           <video src="assets/video/kids-carnival.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Kids Carnival</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/ornament-process.mp4" data-type="video">
           <video src="assets/video/ornament-process.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Ornament — Making Of</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/ornament-stir.mp4" data-type="video">
           <video src="assets/video/ornament-stir.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Ornament Stir</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/potato.mp4" data-type="video">
           <video src="assets/video/potato.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Potato Pull</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/thunder-celebration.mp4" data-type="video">
           <video src="assets/video/thunder-celebration.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">Thunder — Celebration</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/video/ut-martin.mp4" data-type="video">
           <video src="assets/video/ut-martin.mp4" autoplay muted loop playsinline></video>
-          <div class="media-caption">UT Martin Hype</div>
         </div>
-        <div class="media-item">
+        <div class="media-item" data-src="assets/img/anniv-big-cup.png" data-type="image">
           <img src="assets/img/anniv-big-cup.png" alt="Eskimo Joe's Anniversary Big Cup" loading="lazy">
-          <div class="media-caption">Anniversary — Big Cup</div>
         </div>
       </div>
     </div>
@@ -225,6 +213,12 @@
   <footer class="footer">
     <span>&copy; 2026 Parker Bradley &middot; <a href="assets/docs/resume.pdf" download="Parker_Bradley_Resume.pdf">Download Resume</a></span>
   </footer>
+
+  <!-- ===== LIGHTBOX ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Media viewer">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+    <div class="lightbox-content" id="lightbox-content"></div>
+  </div>
 
   <script src="assets/js/main.js"></script>
 </body>
