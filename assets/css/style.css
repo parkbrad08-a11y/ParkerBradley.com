@@ -105,13 +105,20 @@ h1, h2, h3 {
   font-size: 13px;
   font-weight: 400;
   color: var(--cream-50);
-  transition: color 0.3s;
+  transition: color 0.25s ease-out;
   letter-spacing: 0.5px;
+  cursor: pointer;
 }
 
 .nav-link:hover,
 .nav-link.active {
   color: var(--mint);
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 /* ===== HERO ===== */
@@ -146,6 +153,12 @@ h1, h2, h3 {
   border-radius: 50%;
   background: var(--green);
   flex-shrink: 0;
+  animation: pulse-dot 2.4s ease-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.5); }
+  50% { box-shadow: 0 0 0 5px rgba(74, 222, 128, 0); }
 }
 
 .hero-name {
@@ -354,13 +367,20 @@ h1, h2, h3 {
   border: 1.5px solid var(--mint);
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.25s ease-out, color 0.25s ease-out;
   letter-spacing: 0.5px;
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .btn-pill:hover {
   background: var(--mint);
   color: var(--bg);
+}
+
+.btn-pill:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 4px;
 }
 
 /* ===== PROJECT GRID (compact rows) ===== */
@@ -377,13 +397,15 @@ h1, h2, h3 {
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: background 0.25s ease-out, border-color 0.25s ease-out;
   transition: background 0.3s;
   border: 1px solid transparent;
 }
 
 .project-row:hover {
   background: rgba(30, 30, 30, 0.8);
-  border-color: var(--cream-08);
+  border-color: var(--mint);
 }
 
 .project-row-image {
@@ -506,11 +528,20 @@ h1, h2, h3 {
   font-size: 14px;
   font-weight: 400;
   color: var(--cream-50);
-  transition: color 0.3s;
+  transition: color 0.25s ease-out;
+  cursor: pointer;
+  text-underline-offset: 3px;
 }
 
 .contact-link:hover {
   color: var(--mint);
+  text-decoration: underline;
+}
+
+.contact-link:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 4px;
+  border-radius: 2px;
 }
 
 .contact-form {
@@ -572,24 +603,36 @@ h1, h2, h3 {
 
 .footer a {
   color: var(--cream-40);
-  transition: color 0.3s;
+  transition: color 0.25s ease-out;
+  cursor: pointer;
 }
 
 .footer a:hover {
   color: var(--mint);
 }
 
+.footer a:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
 /* ===== SCROLL ANIMATIONS ===== */
 .fade-in {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Stagger project rows */
+.project-row:nth-child(1).fade-in { transition-delay: 0ms; }
+.project-row:nth-child(2).fade-in { transition-delay: 80ms; }
+.project-row:nth-child(3).fade-in { transition-delay: 160ms; }
 
 /* Hero name reveal */
 .hero-name {
@@ -687,5 +730,29 @@ h1, h2, h3 {
   .contact-heading {
     font-size: 36px;
     letter-spacing: -1px;
+  }
+}
+
+/* ===== REDUCED MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .fade-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-name {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-accent-line {
+    width: 28px;
+    transition: none;
   }
 }
