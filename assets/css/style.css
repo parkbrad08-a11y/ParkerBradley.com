@@ -24,6 +24,25 @@
   --radius: 10px;
 }
 
+/* ===== SKIP NAV ===== */
+.skip-nav {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--mint);
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 0 0 8px 8px;
+  transition: top 0.2s;
+}
+
+.skip-nav:focus {
+  top: 0;
+}
+
 /* ===== RESET ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -732,7 +751,8 @@ h1, h2, h3 {
 
 .form-group input:focus,
 .form-group textarea:focus {
-  outline: none;
+  outline: 2px solid var(--mint);
+  outline-offset: 0px;
   border-color: var(--mint);
 }
 
