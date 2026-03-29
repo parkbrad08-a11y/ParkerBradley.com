@@ -638,6 +638,10 @@ h1, h2, h3 {
   line-height: 1.6;
 }
 
+/* Tighten gap between media reel and About */
+#work { padding-bottom: 8px; }
+#about { padding-top: var(--space-md); }
+
 /* ===== ABOUT ===== */
 .about-layout {
   display: grid;
