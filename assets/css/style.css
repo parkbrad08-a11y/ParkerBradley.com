@@ -845,7 +845,6 @@ h1, h2, h3 {
   align-items: center;
   overflow-x: scroll;
   scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   gap: 16px;
   scrollbar-width: none;
@@ -860,10 +859,6 @@ h1, h2, h3 {
   display: none;
 }
 
-.carousel-spacer {
-  flex-shrink: 0;
-  width: calc(15% - 8px);
-}
 
 .carousel-item {
   flex-shrink: 0;
@@ -953,7 +948,6 @@ h1, h2, h3 {
 
 @media (max-width: 600px) {
   .carousel-item { width: 82%; }
-  .carousel-spacer { width: calc(9% - 8px); }
   .carousel-btn--prev { left: 8px; }
   .carousel-btn--next { right: 8px; }
 }

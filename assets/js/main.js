@@ -162,16 +162,61 @@ const track = document.getElementById('carousel-track');
 const dotsContainer = document.getElementById('carousel-dots');
 
 if (track && dotsContainer) {
-  const items = Array.from(track.querySelectorAll('.carousel-item'));
-  const total = items.length;
+  const origItems = Array.from(track.querySelectorAll('.carousel-item'));
+  const total = origItems.length;
   let currentIndex = 0;
   let autoAdvanceTimer = null;
   let isDragging = false;
   let dragStartX = 0;
   let dragScrollLeft = 0;
+  let isRepositioning = false;
+
+  // Clone all items for infinite loop: prepend copies of all items (in order)
+  // and append copies of all items (in order)
+  for (let i = total - 1; i >= 0; i--) {
+    const clone = origItems[i].cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.insertBefore(clone, track.firstChild);
+  }
+  for (let i = 0; i < total; i++) {
+    const clone = origItems[i].cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    track.appendChild(clone);
+  }
+
+  const offset = total; // number of clones prepended
+
+  function allItems() {
+    return Array.from(track.querySelectorAll('.carousel-item'));
+  }
+
+  // Center a given item in the track using scrollLeft only (no page scroll)
+  function centerOn(item, smooth) {
+    const left = item.offsetLeft - (track.clientWidth - item.offsetWidth) / 2;
+    if (smooth) {
+      track.style.scrollBehavior = 'smooth';
+      track.scrollLeft = left;
+      // Reset after transition
+      setTimeout(() => { track.style.scrollBehavior = ''; }, 500);
+    } else {
+      track.style.scrollBehavior = 'auto';
+      track.scrollLeft = left;
+      track.style.scrollBehavior = '';
+    }
+  }
+
+  function goTo(realIndex, smooth = true) {
+    currentIndex = ((realIndex % total) + total) % total;
+    centerOn(allItems()[offset + currentIndex], smooth);
+    updateDots(currentIndex);
+    if (smooth) resetAutoAdvance();
+  }
+
+  function next() { goTo(currentIndex + 1); }
+  function prev() { goTo(currentIndex - 1); }
 
   // Generate dots
-  items.forEach((_, i) => {
+  origItems.forEach((_, i) => {
     const dot = document.createElement('button');
     dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
     dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
@@ -179,54 +224,48 @@ if (track && dotsContainer) {
     dotsContainer.appendChild(dot);
   });
 
-  function getDots() {
-    return Array.from(dotsContainer.querySelectorAll('.carousel-dot'));
-  }
-
   function updateDots(index) {
-    getDots().forEach((d, i) => d.classList.toggle('active', i === index));
+    Array.from(dotsContainer.querySelectorAll('.carousel-dot'))
+      .forEach((d, i) => d.classList.toggle('active', i === index));
   }
 
-  function goTo(index) {
-    currentIndex = Math.max(0, Math.min(index, total - 1));
-    items[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    updateDots(currentIndex);
-    resetAutoAdvance();
-  }
-
-  function next() { goTo((currentIndex + 1) % total); }
-  function prev() { goTo((currentIndex - 1 + total) % total); }
-
-  function startAutoAdvance() {
-    autoAdvanceTimer = setInterval(next, 4000);
-  }
-
-  function resetAutoAdvance() {
-    clearInterval(autoAdvanceTimer);
-    startAutoAdvance();
-  }
-
-  // Scroll end detection — sync index and dots
-  let scrollEndTimer = null;
+  // Scroll-end: detect position and silently reposition if in clone territory
+  let scrollTimer = null;
   track.addEventListener('scroll', () => {
-    clearTimeout(scrollEndTimer);
-    scrollEndTimer = setTimeout(() => {
-      const trackRect = track.getBoundingClientRect();
-      const trackCenter = trackRect.left + trackRect.width / 2;
-      let closest = 0;
-      let minDist = Infinity;
+    if (isRepositioning) return;
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      const items = allItems();
+      const scrollCenter = track.scrollLeft + track.clientWidth / 2;
+      let closestIdx = 0, minDist = Infinity;
       items.forEach((item, i) => {
-        const rect = item.getBoundingClientRect();
-        const itemCenter = rect.left + rect.width / 2;
-        const dist = Math.abs(itemCenter - trackCenter);
-        if (dist < minDist) { minDist = dist; closest = i; }
+        const dist = Math.abs((item.offsetLeft + item.offsetWidth / 2) - scrollCenter);
+        if (dist < minDist) { minDist = dist; closestIdx = i; }
       });
-      currentIndex = closest;
-      updateDots(currentIndex);
+
+      if (closestIdx < offset) {
+        // In prepended clones — silently jump to real equivalent
+        isRepositioning = true;
+        centerOn(items[offset + closestIdx], false);
+        currentIndex = closestIdx;
+        updateDots(currentIndex);
+        requestAnimationFrame(() => { isRepositioning = false; });
+      } else if (closestIdx >= offset + total) {
+        // In appended clones — silently jump to real equivalent
+        const realIdx = closestIdx - offset - total;
+        isRepositioning = true;
+        centerOn(items[offset + realIdx], false);
+        currentIndex = realIdx;
+        updateDots(currentIndex);
+        requestAnimationFrame(() => { isRepositioning = false; });
+      } else {
+        currentIndex = closestIdx - offset;
+        updateDots(currentIndex);
+      }
     }, 80);
   }, { passive: true });
 
-  // Drag-to-scroll (mouse)
+  // Drag-to-scroll
   track.addEventListener('mousedown', (e) => {
     isDragging = true;
     dragStartX = e.pageX - track.offsetLeft;
@@ -234,41 +273,46 @@ if (track && dotsContainer) {
     clearInterval(autoAdvanceTimer);
     track.style.userSelect = 'none';
   });
-
   track.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
-    const x = e.pageX - track.offsetLeft;
-    track.scrollLeft = dragScrollLeft - (x - dragStartX);
+    track.scrollLeft = dragScrollLeft - (e.pageX - track.offsetLeft - dragStartX);
   });
+  ['mouseup', 'mouseleave'].forEach(evt => track.addEventListener(evt, () => {
+    if (!isDragging) return;
+    isDragging = false;
+    track.style.userSelect = '';
+    resetAutoAdvance();
+  }));
 
-  ['mouseup', 'mouseleave'].forEach(evt => {
-    track.addEventListener(evt, () => {
-      if (!isDragging) return;
-      isDragging = false;
-      track.style.userSelect = '';
-      resetAutoAdvance();
-    });
-  });
-
-  // Pause on hover
   track.addEventListener('mouseenter', () => clearInterval(autoAdvanceTimer));
   track.addEventListener('mouseleave', () => { if (!isDragging) startAutoAdvance(); });
 
-  // Prev / Next buttons
   const prevBtn = document.querySelector('.carousel-btn--prev');
   const nextBtn = document.querySelector('.carousel-btn--next');
-  if (prevBtn) prevBtn.addEventListener('click', () => { prev(); });
-  if (nextBtn) nextBtn.addEventListener('click', () => { next(); });
+  if (prevBtn) prevBtn.addEventListener('click', prev);
+  if (nextBtn) nextBtn.addEventListener('click', next);
 
-  // Click-to-lightbox
-  items.forEach(item => {
-    item.addEventListener('click', (e) => {
+  // Click-to-lightbox on original items only
+  origItems.forEach(item => {
+    item.addEventListener('click', () => {
       if (isDragging) return;
       openLightbox(item.dataset.src, item.dataset.type);
     });
   });
 
-  startAutoAdvance();
+  function startAutoAdvance() {
+    autoAdvanceTimer = setInterval(next, 4000);
+  }
+  function resetAutoAdvance() {
+    clearInterval(autoAdvanceTimer);
+    startAutoAdvance();
+  }
+
+  // Initialize centered on first real item
+  requestAnimationFrame(() => {
+    centerOn(allItems()[offset], false);
+    startAutoAdvance();
+  });
 }
 
 // ===== VIDEO AUTOPLAY (muted, play on scroll into view) =====
