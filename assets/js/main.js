@@ -167,6 +167,17 @@ document.addEventListener('keydown', (e) => {
 const mediaReel = document.querySelector('.media-reel');
 const reelToggle = document.querySelector('.media-reel-toggle');
 if (mediaReel && reelToggle) {
+  // Entrance animation — fires once when button scrolls into view
+  const toggleObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        toggleObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.8 });
+  toggleObserver.observe(reelToggle);
+
   reelToggle.addEventListener('click', () => {
     mediaReel.classList.remove('media-reel--collapsed');
     reelToggle.setAttribute('aria-expanded', 'true');
