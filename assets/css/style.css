@@ -862,7 +862,7 @@ h1, h2, h3 {
 
 .carousel-item {
   flex-shrink: 0;
-  width: 70%;
+  height: 420px;
   scroll-snap-align: center;
   border-radius: var(--radius);
   overflow: hidden;
@@ -871,17 +871,15 @@ h1, h2, h3 {
 
 .carousel-item video,
 .carousel-item img {
-  width: 100%;
   height: 420px;
-  object-fit: cover;
+  width: auto;
   display: block;
 }
 
 @media (max-width: 600px) {
+  .carousel-item { height: 260px; }
   .carousel-item video,
-  .carousel-item img {
-    height: 260px;
-  }
+  .carousel-item img { height: 260px; }
 }
 
 .carousel-btn {
