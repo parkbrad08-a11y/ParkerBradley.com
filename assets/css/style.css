@@ -352,7 +352,7 @@ h1, h2, h3 {
 
 /* ===== MEDIA REEL ===== */
 .media-reel {
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-xs);
   position: relative;
 }
 
