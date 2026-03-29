@@ -353,6 +353,36 @@ h1, h2, h3 {
 /* ===== MEDIA REEL ===== */
 .media-reel {
   margin-bottom: var(--space-xl);
+  position: relative;
+}
+
+.media-reel--collapsed .media-grid {
+  max-height: 860px;
+  overflow: hidden;
+}
+
+.media-reel-fade {
+  display: none;
+  position: absolute;
+  bottom: 56px;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--bg));
+  pointer-events: none;
+}
+
+.media-reel--collapsed .media-reel-fade {
+  display: block;
+}
+
+.media-reel-toggle {
+  display: none;
+  margin: 20px auto 0;
+}
+
+.media-reel--collapsed .media-reel-toggle {
+  display: block;
 }
 
 .media-grid {

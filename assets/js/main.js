@@ -163,6 +163,16 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
 });
 
+// ===== MEDIA REEL TOGGLE =====
+const mediaReel = document.querySelector('.media-reel');
+const reelToggle = document.querySelector('.media-reel-toggle');
+if (mediaReel && reelToggle) {
+  reelToggle.addEventListener('click', () => {
+    mediaReel.classList.remove('media-reel--collapsed');
+    reelToggle.setAttribute('aria-expanded', 'true');
+  });
+}
+
 // ===== VIDEO AUTOPLAY (muted, play on scroll into view) =====
 const videoObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
