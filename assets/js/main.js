@@ -147,12 +147,6 @@ function closeLightbox() {
   lightboxContent.innerHTML = '';
 }
 
-document.querySelectorAll('.media-item').forEach(item => {
-  item.addEventListener('click', () => {
-    openLightbox(item.dataset.src, item.dataset.type);
-  });
-});
-
 lightboxClose.addEventListener('click', closeLightbox);
 
 lightbox.addEventListener('click', (e) => {
@@ -163,25 +157,118 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
 });
 
-// ===== MEDIA REEL TOGGLE =====
-const mediaReel = document.querySelector('.media-reel');
-const reelToggle = document.querySelector('.media-reel-toggle');
-if (mediaReel && reelToggle) {
-  // Entrance animation — fires once when button scrolls into view
-  const toggleObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in');
-        toggleObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.8 });
-  toggleObserver.observe(reelToggle);
+// ===== CAROUSEL =====
+const track = document.getElementById('carousel-track');
+const dotsContainer = document.getElementById('carousel-dots');
 
-  reelToggle.addEventListener('click', () => {
-    mediaReel.classList.remove('media-reel--collapsed');
-    reelToggle.setAttribute('aria-expanded', 'true');
+if (track && dotsContainer) {
+  const items = Array.from(track.querySelectorAll('.carousel-item'));
+  const total = items.length;
+  let currentIndex = 0;
+  let autoAdvanceTimer = null;
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragScrollLeft = 0;
+
+  // Generate dots
+  items.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
   });
+
+  function getDots() {
+    return Array.from(dotsContainer.querySelectorAll('.carousel-dot'));
+  }
+
+  function updateDots(index) {
+    getDots().forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  function goTo(index) {
+    currentIndex = Math.max(0, Math.min(index, total - 1));
+    items[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    updateDots(currentIndex);
+    resetAutoAdvance();
+  }
+
+  function next() { goTo((currentIndex + 1) % total); }
+  function prev() { goTo((currentIndex - 1 + total) % total); }
+
+  function startAutoAdvance() {
+    autoAdvanceTimer = setInterval(next, 4000);
+  }
+
+  function resetAutoAdvance() {
+    clearInterval(autoAdvanceTimer);
+    startAutoAdvance();
+  }
+
+  // Scroll end detection — sync index and dots
+  let scrollEndTimer = null;
+  track.addEventListener('scroll', () => {
+    clearTimeout(scrollEndTimer);
+    scrollEndTimer = setTimeout(() => {
+      const trackRect = track.getBoundingClientRect();
+      const trackCenter = trackRect.left + trackRect.width / 2;
+      let closest = 0;
+      let minDist = Infinity;
+      items.forEach((item, i) => {
+        const rect = item.getBoundingClientRect();
+        const itemCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(itemCenter - trackCenter);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      currentIndex = closest;
+      updateDots(currentIndex);
+    }, 80);
+  }, { passive: true });
+
+  // Drag-to-scroll (mouse)
+  track.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    dragStartX = e.pageX - track.offsetLeft;
+    dragScrollLeft = track.scrollLeft;
+    clearInterval(autoAdvanceTimer);
+    track.style.userSelect = 'none';
+  });
+
+  track.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const x = e.pageX - track.offsetLeft;
+    track.scrollLeft = dragScrollLeft - (x - dragStartX);
+  });
+
+  ['mouseup', 'mouseleave'].forEach(evt => {
+    track.addEventListener(evt, () => {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.userSelect = '';
+      resetAutoAdvance();
+    });
+  });
+
+  // Pause on hover
+  track.addEventListener('mouseenter', () => clearInterval(autoAdvanceTimer));
+  track.addEventListener('mouseleave', () => { if (!isDragging) startAutoAdvance(); });
+
+  // Prev / Next buttons
+  const prevBtn = document.querySelector('.carousel-btn--prev');
+  const nextBtn = document.querySelector('.carousel-btn--next');
+  if (prevBtn) prevBtn.addEventListener('click', () => { prev(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { next(); });
+
+  // Click-to-lightbox
+  items.forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (isDragging) return;
+      openLightbox(item.dataset.src, item.dataset.type);
+    });
+  });
+
+  startAutoAdvance();
 }
 
 // ===== VIDEO AUTOPLAY (muted, play on scroll into view) =====

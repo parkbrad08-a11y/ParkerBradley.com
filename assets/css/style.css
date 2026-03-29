@@ -834,6 +834,127 @@ h1, h2, h3 {
   border-radius: 2px;
 }
 
+/* ===== CAROUSEL ===== */
+.carousel {
+  position: relative;
+  margin-bottom: var(--space-sm);
+}
+
+.carousel-track {
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  gap: 16px;
+  scrollbar-width: none;
+  cursor: grab;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-spacer {
+  flex-shrink: 0;
+  width: calc(15% - 8px);
+}
+
+.carousel-item {
+  flex-shrink: 0;
+  width: 70%;
+  scroll-snap-align: center;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.carousel-item video,
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(12, 12, 12, 0.6);
+  border: 1px solid var(--cream-20);
+  color: var(--cream);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease-out, border-color 0.25s ease-out;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.carousel-btn:hover {
+  background: rgba(12, 12, 12, 0.9);
+  border-color: var(--mint);
+}
+
+.carousel-btn:focus-visible {
+  outline: 2px solid var(--mint);
+  outline-offset: 3px;
+}
+
+.carousel-btn--prev { left: 20px; }
+.carousel-btn--next { right: 20px; }
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: var(--space-md) 0 var(--space-sm);
+}
+
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cream-20);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.carousel-dot.active {
+  background: var(--mint);
+  transform: scale(1.4);
+}
+
+.carousel-footer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: var(--space-xl);
+}
+
+@media (max-width: 600px) {
+  .carousel-item { width: 82%; }
+  .carousel-spacer { width: calc(9% - 8px); }
+  .carousel-btn--prev { left: 8px; }
+  .carousel-btn--next { right: 8px; }
+}
+
+/* ===== WORK PAGE GRID ===== */
+.work-page .section {
+  padding-top: calc(88px + var(--space-lg));
+}
+
 /* ===== SCROLL ANIMATIONS ===== */
 .fade-in {
   opacity: 0;

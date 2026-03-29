@@ -102,93 +102,41 @@
       <span class="section-rule"></span>
     </div>
 
-    <!-- Project 1 — Featured (large) -->
-    <div class="project project-featured">
-      <div class="project-image">
-        <video class="project-video" src="assets/video/game-night.mp4" autoplay muted loop playsinline></video>
-        <div class="project-hover-overlay">
-          <span class="project-category">Eskimo Joe's</span>
-          <h2 class="project-hover-title">Joe's Anniversary Week</h2>
-          <p class="project-hover-desc">Capturing 50 years of history and tradition in 10 hectic days of celebration.</p>
-          <div class="project-hover-metric">
-            <span class="metric-number">+1M</span>
-            <span class="metric-label">views</span>
-          </div>
-          <div class="project-hover-metric">
-            <span class="metric-number">+161.9%</span>
-            <span class="metric-label">interactions</span>
-          </div>
-          <div class="project-hover-metric">
-            <span class="metric-number">670+</span>
-            <span class="metric-label">new followers</span>
-          </div>
-        </div>
-      </div>
-      <div class="project-details">
-        <span class="project-category">Eskimo Joe's</span>
-        <h2 class="project-title">Joe's Anniversary Week</h2>
-        <p class="project-desc">Capturing 50 years of history and tradition in 10 hectic days of celebration.</p>
-        <div class="project-metrics">
-          <div class="project-metric">
-            <span class="metric-number">+1M</span>
-            <span class="metric-label">views</span>
-          </div>
-          <div class="project-metric">
-            <span class="metric-number">+161.9%</span>
-            <span class="metric-label">interactions</span>
-          </div>
-          <div class="project-metric">
-            <span class="metric-number">670+</span>
-            <span class="metric-label">new followers</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Content Reel — EJ media grid -->
-    <div class="media-reel media-reel--collapsed">
-      <div class="media-grid">
-        <!-- Ranked: E, J, K, C, A, N -->
-        <div class="media-item" data-src="assets/video/hoco.mp4" data-type="video">
+    <div class="carousel">
+      <button class="carousel-btn carousel-btn--prev" aria-label="Previous">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="carousel-track" id="carousel-track">
+        <div class="carousel-spacer"></div>
+        <div class="carousel-item" data-src="assets/video/hoco.mp4" data-type="video">
           <video src="assets/video/hoco.mp4" autoplay muted loop playsinline></video>
         </div>
-        <div class="media-item" data-src="assets/video/ornament-stir.mp4" data-type="video">
+        <div class="carousel-item" data-src="assets/video/ornament-stir.mp4" data-type="video">
           <video src="assets/video/ornament-stir.mp4" autoplay muted loop playsinline></video>
         </div>
-        <div class="media-item" data-src="assets/video/potato.mp4" data-type="video">
+        <div class="carousel-item" data-src="assets/video/potato.mp4" data-type="video">
           <video src="assets/video/potato.mp4" autoplay muted loop playsinline></video>
         </div>
-        <div class="media-item" data-src="assets/video/kids-carnival.mp4" data-type="video">
-          <video src="assets/video/kids-carnival.mp4" autoplay muted loop playsinline></video>
-        </div>
-        <div class="media-item" data-src="assets/video/glow-night.mp4" data-type="video">
+        <div class="carousel-item" data-src="assets/video/glow-night.mp4" data-type="video">
           <video src="assets/video/glow-night.mp4" autoplay muted loop playsinline></video>
         </div>
-        <div class="media-item" data-src="assets/video/ornament-process.mp4" data-type="video">
+        <div class="carousel-item" data-src="assets/video/ornament-process.mp4" data-type="video">
           <video src="assets/video/ornament-process.mp4" autoplay muted loop playsinline></video>
         </div>
-        <div class="media-item" data-src="assets/video/ut-martin.mp4" data-type="video">
+        <div class="carousel-item" data-src="assets/video/ut-martin.mp4" data-type="video">
           <video src="assets/video/ut-martin.mp4" autoplay muted loop playsinline></video>
         </div>
-        <!-- Unranked -->
-        <div class="media-item" data-src="assets/video/golf-classic.mp4" data-type="video">
-          <video src="assets/video/golf-classic.mp4" autoplay muted loop playsinline></video>
-        </div>
-        <div class="media-item" data-src="assets/video/holiday-atmos.mp4" data-type="video">
-          <video src="assets/video/holiday-atmos.mp4" autoplay muted loop playsinline></video>
-        </div>
-        <div class="media-item" data-src="assets/video/cheese-fry.mp4" data-type="video">
-          <video src="assets/video/cheese-fry.mp4" autoplay muted loop playsinline></video>
-        </div>
-        <div class="media-item" data-src="assets/video/thunder-celebration.mp4" data-type="video">
-          <video src="assets/video/thunder-celebration.mp4" autoplay muted loop playsinline></video>
-        </div>
-        <div class="media-item" data-src="assets/img/anniv-big-cup.png" data-type="image">
-          <img src="assets/img/anniv-big-cup.png" alt="Eskimo Joe's Anniversary Big Cup" loading="lazy">
-        </div>
+        <div class="carousel-spacer"></div>
       </div>
-      <div class="media-reel-fade"></div>
-      <button class="media-reel-toggle btn-pill" aria-expanded="false">View All Work</button>
+      <button class="carousel-btn carousel-btn--next" aria-label="Next">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+
+    <div class="carousel-dots" id="carousel-dots"></div>
+
+    <div class="carousel-footer">
+      <a href="work.html" class="btn-pill">View All Work</a>
     </div>
 
   </section>
