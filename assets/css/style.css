@@ -1007,9 +1007,10 @@ h1, h2, h3 {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 36px;
   font-weight: 800;
+  letter-spacing: 0.06em;
   color: var(--cream);
   text-transform: uppercase;
-  line-height: 1;
+  line-height: 1.1;
   margin: var(--space-xs) 0 var(--space-sm);
 }
 
