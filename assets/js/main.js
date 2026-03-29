@@ -62,6 +62,10 @@ document.querySelectorAll('.section-header, .project-featured, .project-row, .ab
   revealObserver.observe(el);
 });
 
+document.querySelectorAll('.project-card').forEach(el => {
+  revealObserver.observe(el);
+});
+
 // ===== CONTACT FORM =====
 const contactForm = document.getElementById('contact-form');
 
