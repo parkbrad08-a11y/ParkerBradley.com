@@ -357,23 +357,14 @@ h1, h2, h3 {
 }
 
 .media-reel--collapsed .media-grid {
-  max-height: 1060px;
+  max-height: 1300px;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 62%, rgba(0,0,0,0.4) 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 62%, rgba(0,0,0,0.4) 82%, transparent 100%);
 }
 
 .media-reel-fade {
   display: none;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 260px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(12,12,12,0.65) 45%, var(--bg) 100%);
-  pointer-events: none;
-}
-
-.media-reel--collapsed .media-reel-fade {
-  display: block;
 }
 
 .media-reel-toggle {
