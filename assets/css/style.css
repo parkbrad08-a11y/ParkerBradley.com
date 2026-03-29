@@ -877,8 +877,16 @@ h1, h2, h3 {
 .carousel-item video,
 .carousel-item img {
   width: 100%;
-  height: auto;
+  height: 420px;
+  object-fit: cover;
   display: block;
+}
+
+@media (max-width: 600px) {
+  .carousel-item video,
+  .carousel-item img {
+    height: 260px;
+  }
 }
 
 .carousel-btn {
