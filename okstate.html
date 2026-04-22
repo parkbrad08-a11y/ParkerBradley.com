@@ -237,6 +237,43 @@
 
     footer a:hover { color: var(--cream); }
 
+    .projects-preview {
+      padding: 3rem 2.5rem 0;
+      max-width: 900px;
+    }
+
+    .projects-preview-label {
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 1.5rem;
+    }
+
+    .projects-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .projects-preview-grid img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      border: 1px solid rgba(237,232,220,.08);
+      transition: border-color .2s;
+    }
+
+    .projects-preview-grid img:hover {
+      border-color: rgba(110,205,192,.35);
+    }
+
+    @media (max-width: 600px) {
+      .projects-preview-grid { grid-template-columns: 1fr; }
+      .projects-preview { padding-left: 1.25rem; padding-right: 1.25rem; }
+    }
+
     @media (max-width: 600px) {
       nav, .hero, section, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
       .resume-block { flex-direction: column; align-items: flex-start; }
@@ -254,6 +291,15 @@
     <p class="label">SMSC Class Portfolio</p>
     <h1>OK State</h1>
     <p>Code of ethics, class work, a few things I'm proud of from four years at Oklahoma State. This page is for the SMSC elevator pitch assignment. Not the main show.</p>
+  </div>
+
+  <div class="projects-preview">
+    <p class="projects-preview-label">Class Work</p>
+    <div class="projects-preview-grid">
+      <img src="/assets/img/ParkerBradleyFontPosterDraftVer6.jpg" alt="Font poster project">
+      <img src="/assets/img/ParkerBradleyMagCoverDraft4.jpg" alt="Magazine cover project">
+      <img src="/assets/img/ParkerBradleyRackCardDraftVer4.jpg" alt="Rack card project">
+    </div>
   </div>
 
   <section id="ethics">
