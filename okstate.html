@@ -10,41 +10,50 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --black:  #0C0C0C;
-      --cream:  #EDE8DC;
-      --mint:   #6ECDC0;
-      --blue:   #4E8FA8;
-      --gray:   #888880;
+      --black: #0C0C0C;
+      --cream: #EDE8DC;
+      --mint:  #6ECDC0;
+      --blue:  #4E8FA8;
+      --gray:  #888880;
+      --rule:  rgba(237,232,220,.08);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+    }
 
     body {
       background: var(--black);
       color: var(--cream);
       font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      line-height: 1.65;
+      font-size: .875rem;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
     }
 
+    /* ── NAV ── */
     nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.5rem 2.5rem;
-      border-bottom: 1px solid rgba(237,232,220,.1);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--rule);
+      flex-shrink: 0;
     }
 
     nav a.logo {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       color: var(--cream);
       text-decoration: none;
       letter-spacing: .04em;
     }
 
     nav a.back {
-      font-size: .85rem;
+      font-size: .75rem;
       color: var(--gray);
       text-decoration: none;
       letter-spacing: .06em;
@@ -54,229 +63,213 @@
 
     nav a.back:hover { color: var(--mint); }
 
-    .hero {
-      padding: 5rem 2.5rem 3rem;
-      max-width: 860px;
+    /* ── THREE-COLUMN GRID ── */
+    .page-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr 1fr;
+      flex: 1;
+      overflow: hidden;
     }
 
-    .hero .label {
-      font-size: .75rem;
+    .col {
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .col + .col {
+      border-left: 1px solid var(--rule);
+    }
+
+    /* ── LEFT: IDENTITY ── */
+    .col-identity {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .identity-top .label {
+      font-size: .65rem;
       letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--mint);
-      margin-bottom: .75rem;
+      margin-bottom: .6rem;
     }
 
-    .hero h1 {
+    .identity-top h1 {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: clamp(2.8rem, 7vw, 5rem);
-      line-height: 1;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: .95;
       letter-spacing: -.01em;
       color: var(--cream);
-      margin-bottom: 1.25rem;
     }
 
-    .hero p {
-      color: var(--gray);
-      max-width: 540px;
-      font-size: .95rem;
-    }
-
-    section {
-      padding: 5rem 2.5rem;
-      border-top: 1px solid rgba(237,232,220,.08);
-      max-width: 900px;
-    }
-
-    .section-label {
+    .identity-bottom {
       font-size: .72rem;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    .identity-bottom a {
+      color: var(--mint);
+      text-decoration: none;
+    }
+
+    /* ── MIDDLE: ETHICS ── */
+    .col-ethics {}
+
+    .col-label {
+      font-size: .65rem;
       letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--mint);
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
     }
 
     .ethics-grid {
       display: grid;
-      gap: 2.25rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem 1.5rem;
     }
 
     .ethic {
       border-left: 2px solid var(--mint);
-      padding-left: 1.5rem;
+      padding-left: 1rem;
     }
 
     .ethic h3 {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.3rem;
+      font-size: 1rem;
       letter-spacing: .02em;
       color: var(--cream);
-      margin-bottom: .5rem;
+      margin-bottom: .3rem;
+      line-height: 1.1;
     }
 
     .ethic p {
-      font-size: .925rem;
+      font-size: .78rem;
       color: #b8b4aa;
-      line-height: 1.7;
+      line-height: 1.55;
     }
 
-    .projects-grid {
-      display: grid;
-      gap: 1.75rem;
-    }
-
-    .project-card {
-      background: rgba(237,232,220,.04);
-      border: 1px solid rgba(237,232,220,.1);
-      border-radius: 4px;
-      padding: 2rem;
-      transition: border-color .2s;
-    }
-
-    .project-card:hover { border-color: rgba(110,205,192,.35); }
-
-    .project-card .tag {
-      font-size: .72rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--blue);
-      margin-bottom: .75rem;
-    }
-
-    .project-card h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.5rem;
-      color: var(--cream);
-      margin-bottom: .6rem;
-    }
-
-    .project-card p {
-      font-size: .9rem;
-      color: #b8b4aa;
-      line-height: 1.7;
-      margin-bottom: 1.25rem;
-    }
-
-    .project-card a {
-      font-size: .8rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--mint);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(110,205,192,.3);
-      padding-bottom: 1px;
-      transition: border-color .2s;
-    }
-
-    .project-card a:hover { border-color: var(--mint); }
-
-    .todo-note {
-      display: inline-block;
-      margin-top: .5rem;
-      padding: .3rem .75rem;
-      background: rgba(110,205,192,.08);
-      border: 1px dashed rgba(110,205,192,.3);
-      border-radius: 3px;
-      font-size: .75rem;
-      color: var(--mint);
-      letter-spacing: .06em;
-    }
-
-    .resume-block {
+    /* ── RIGHT: WORK + RESUME ── */
+    .col-work {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      flex-direction: column;
       gap: 1.5rem;
     }
 
-    .resume-block p {
-      font-size: .95rem;
-      color: #b8b4aa;
-      max-width: 480px;
+    .work-images {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .5rem;
+    }
+
+    .work-images img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 3px;
+      border: 1px solid rgba(237,232,220,.08);
+      transition: border-color .2s;
+    }
+
+    .work-images img:hover { border-color: rgba(110,205,192,.35); }
+
+    .resume-row {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .resume-preview {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .resume-preview a {
+      display: block;
+    }
+
+    .resume-preview img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 3px;
+      border: 1px solid rgba(237,232,220,.1);
+      box-shadow: 0 6px 24px rgba(0,0,0,.4);
+    }
+
+    .resume-meta {
+      flex-shrink: 0;
+      width: 140px;
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+    }
+
+    .resume-meta p {
+      font-size: .72rem;
+      color: var(--gray);
+      line-height: 1.55;
     }
 
     .btn {
       display: inline-block;
-      padding: .75rem 1.75rem;
+      padding: .55rem 1rem;
       background: var(--mint);
       color: var(--black);
       font-family: 'DM Sans', sans-serif;
-      font-size: .8rem;
+      font-size: .72rem;
       font-weight: 500;
-      letter-spacing: .08em;
+      letter-spacing: .06em;
       text-transform: uppercase;
       text-decoration: none;
       border-radius: 2px;
       transition: opacity .2s;
+      text-align: center;
     }
 
     .btn:hover { opacity: .85; }
 
+    /* ── FOOTER ── */
     footer {
-      padding: 2.5rem;
-      border-top: 1px solid rgba(237,232,220,.08);
+      padding: .75rem 2rem;
+      border-top: 1px solid var(--rule);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
+      flex-shrink: 0;
     }
 
-    footer p {
-      font-size: .8rem;
-      color: var(--gray);
-    }
-
-    footer a {
+    footer p, footer a {
+      font-size: .72rem;
       color: var(--gray);
       text-decoration: none;
-      font-size: .8rem;
       transition: color .2s;
     }
 
     footer a:hover { color: var(--cream); }
 
-    .projects-preview {
-      padding: 3rem 2.5rem 0;
-      max-width: 900px;
-    }
+    /* ── MOBILE FALLBACK ── */
+    @media (max-width: 900px) {
+      .page-grid {
+        grid-template-columns: 1fr;
+        overflow: visible;
+      }
 
-    .projects-preview-label {
-      font-size: .72rem;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: var(--mint);
-      margin-bottom: 1.5rem;
-    }
+      .col {
+        overflow-y: visible;
+        border-left: none !important;
+        border-top: 1px solid var(--rule);
+      }
 
-    .projects-preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
+      .col:first-child { border-top: none; }
 
-    .projects-preview-grid img {
-      width: 100%;
-      height: auto;
-      display: block;
-      border-radius: 4px;
-      border: 1px solid rgba(237,232,220,.08);
-      transition: border-color .2s;
-    }
+      .ethics-grid { grid-template-columns: 1fr; }
 
-    .projects-preview-grid img:hover {
-      border-color: rgba(110,205,192,.35);
-    }
+      .resume-row { flex-direction: column; }
 
-    @media (max-width: 600px) {
-      .projects-preview-grid { grid-template-columns: 1fr; }
-      .projects-preview { padding-left: 1.25rem; padding-right: 1.25rem; }
-    }
-
-    @media (max-width: 600px) {
-      nav, .hero, section, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
-      .resume-block { flex-direction: column; align-items: flex-start; }
+      .resume-meta { width: 100%; }
     }
   </style>
 </head>
@@ -287,63 +280,82 @@
     <a class="back" href="https://parkerbradley.xyz">← parkerbradley.xyz</a>
   </nav>
 
-  <div class="hero">
-    <p class="label">SMSC Class Portfolio</p>
-    <h1>OK State</h1>
-    <p>Code of ethics, class work, a few things I'm proud of from four years at Oklahoma State. This page is for the SMSC elevator pitch assignment. Not the main show.</p>
+  <div class="page-grid">
+
+    <!-- LEFT: Identity -->
+    <div class="col col-identity">
+      <div class="identity-top">
+        <p class="label">SMSC Class Portfolio</p>
+        <h1>Parker<br>Bradley</h1>
+      </div>
+      <div class="identity-bottom">
+        <p>Marketing &amp; Communications<br>Oklahoma State University</p>
+        <br>
+        <p><a href="mailto:parkbrad08@gmail.com">parkbrad08@gmail.com</a></p>
+      </div>
+    </div>
+
+    <!-- MIDDLE: Code of Ethics -->
+    <div class="col col-ethics">
+      <p class="col-label">Personal Code of Ethics</p>
+      <div class="ethics-grid">
+
+        <div class="ethic">
+          <h3>The work has to be honest.</h3>
+          <p>Results, metrics, claims. If I can't stand behind it, it doesn't go out. I'm not in the business of making numbers look better than they are. The work either holds up or it doesn't.</p>
+        </div>
+
+        <div class="ethic">
+          <h3>Push boundaries or get left behind.</h3>
+          <p>Safe creative is forgettable creative. I'd rather try something that doesn't work than publish something nobody remembers. The best campaigns I've been part of started with an idea someone almost talked themselves out of.</p>
+        </div>
+
+        <div class="ethic">
+          <h3>Audiences are people, not targets.</h3>
+          <p>The person scrolling past my content has a real life. I earn their attention. I don't manipulate it. That means creating something worth stopping for, not just something designed to trick the algorithm.</p>
+        </div>
+
+        <div class="ethic">
+          <h3>Never stop building your skills.</h3>
+          <p>The tools, the platforms, the strategies. They all change. Staying sharp isn't optional, it's the job. The people who treat learning as a phase instead of a habit are the ones who get passed.</p>
+        </div>
+
+        <div class="ethic">
+          <h3>Own what you put out.</h3>
+          <p>Worked or not, I stand behind it. No spin, no deflection. If something missed, I want to know why. That's the only way to actually get better.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Class Work + Resume -->
+    <div class="col col-work">
+      <div>
+        <p class="col-label">Class Work</p>
+        <div class="work-images">
+          <img src="/assets/img/ParkerBradleyFontPosterDraftVer6.jpg" alt="Font poster project">
+          <img src="/assets/img/ParkerBradleyMagCoverDraft4.jpg" alt="Magazine cover project">
+          <img src="/assets/img/ParkerBradleyRackCardDraftVer4.jpg" alt="Rack card project">
+        </div>
+      </div>
+
+      <div>
+        <p class="col-label">Resume</p>
+        <div class="resume-row">
+          <div class="resume-preview">
+            <a href="/assets/docs/resume.pdf" target="_blank">
+              <img src="/assets/img/resume.pdf.png" alt="Parker Bradley resume preview">
+            </a>
+          </div>
+          <div class="resume-meta">
+            <p>Updated March 2026, prior to accepting the position at Krush Advertising in OKC.</p>
+            <a class="btn" href="/assets/docs/resume.pdf" target="_blank">Download PDF</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-  <div class="projects-preview">
-    <p class="projects-preview-label">Class Work</p>
-    <div class="projects-preview-grid">
-      <img src="/assets/img/ParkerBradleyFontPosterDraftVer6.jpg" alt="Font poster project">
-      <img src="/assets/img/ParkerBradleyMagCoverDraft4.jpg" alt="Magazine cover project">
-      <img src="/assets/img/ParkerBradleyRackCardDraftVer4.jpg" alt="Rack card project">
-    </div>
-  </div>
-
-  <section id="ethics">
-    <p class="section-label">Personal Code of Ethics</p>
-    <div class="ethics-grid">
-
-      <div class="ethic">
-        <h3>The work has to be honest.</h3>
-        <p>Results, metrics, claims. If I can't stand behind it, it doesn't go out. I'm not in the business of making numbers look better than they are. The work either holds up or it doesn't.</p>
-      </div>
-
-      <div class="ethic">
-        <h3>Push boundaries or get left behind.</h3>
-        <p>Safe creative is forgettable creative. I'd rather try something that doesn't work than publish something nobody remembers. The best campaigns I've been part of started with an idea someone almost talked themselves out of.</p>
-      </div>
-
-      <div class="ethic">
-        <h3>Audiences are people, not targets.</h3>
-        <p>The person scrolling past my content has a real life. I earn their attention. I don't manipulate it. That means creating something worth stopping for, not just something designed to trick the algorithm.</p>
-      </div>
-
-      <div class="ethic">
-        <h3>Never stop building your skills.</h3>
-        <p>The tools, the platforms, the strategies. They all change. Staying sharp isn't optional, it's the job. The people who treat learning as a phase instead of a habit are the ones who get passed.</p>
-      </div>
-
-      <div class="ethic">
-        <h3>Own what you put out.</h3>
-        <p>Worked or not, I stand behind it. No spin, no deflection. If something missed, I want to know why. That's the only way to actually get better.</p>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="resume">
-    <p class="section-label">Resume</p>
-    <div class="resume-block">
-      <p>Updated March 2026, prior to accepting the position at Krush Advertising in OKC. Covers Stan Clark Companies and Oklahoma State Athletics.</p>
-      <a class="btn" href="/assets/docs/resume.pdf" target="_blank">Download Resume (PDF)</a>
-    </div>
-    <a href="/assets/docs/resume.pdf" target="_blank" style="display:block;margin-top:2rem;max-width:680px;">
-      <img src="/assets/img/resume.pdf.png" alt="Parker Bradley resume preview" style="width:100%;border-radius:4px;border:1px solid rgba(237,232,220,0.1);box-shadow:0 8px 32px rgba(0,0,0,0.4);">
-    </a>
-  </section>
 
   <footer>
     <p>© 2026 Parker Bradley</p>
