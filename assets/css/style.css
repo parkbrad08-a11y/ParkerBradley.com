@@ -1214,3 +1214,40 @@ h1, h2, h3 {
     transition: none;
   }
 }
+
+/* ===== MEDIA CAPTIONS ===== */
+.carousel-item { position: relative; }
+
+.media-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 1rem 0.75rem;
+  background: linear-gradient(to top, rgba(12,12,12,0.82) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.media-item:hover .media-caption,
+.carousel-item:hover .media-caption {
+  opacity: 1;
+}
+
+.media-caption-title {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #EDE8DC;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.media-caption-desc {
+  display: block;
+  font-size: 0.72rem;
+  color: rgba(237,232,220,0.5);
+  margin-top: 0.2rem;
+  line-height: 1.4;
+}

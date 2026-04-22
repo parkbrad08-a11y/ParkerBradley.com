@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>OK State | Parker Bradley</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black:  #0C0C0C;
+      --cream:  #EDE8DC;
+      --mint:   #6ECDC0;
+      --blue:   #4E8FA8;
+      --gray:   #888880;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 2.5rem;
+      border-bottom: 1px solid rgba(237,232,220,.1);
+    }
+
+    nav a.logo {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.4rem;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: .04em;
+    }
+
+    nav a.back {
+      font-size: .85rem;
+      color: var(--gray);
+      text-decoration: none;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    nav a.back:hover { color: var(--mint); }
+
+    .hero {
+      padding: 5rem 2.5rem 3rem;
+      max-width: 860px;
+    }
+
+    .hero .label {
+      font-size: .75rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: .75rem;
+    }
+
+    .hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      line-height: 1;
+      letter-spacing: -.01em;
+      color: var(--cream);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero p {
+      color: var(--gray);
+      max-width: 540px;
+      font-size: .95rem;
+    }
+
+    section {
+      padding: 5rem 2.5rem;
+      border-top: 1px solid rgba(237,232,220,.08);
+      max-width: 900px;
+    }
+
+    .section-label {
+      font-size: .72rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--mint);
+      margin-bottom: 2rem;
+    }
+
+    .ethics-grid {
+      display: grid;
+      gap: 2.25rem;
+    }
+
+    .ethic {
+      border-left: 2px solid var(--mint);
+      padding-left: 1.5rem;
+    }
+
+    .ethic h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: .02em;
+      color: var(--cream);
+      margin-bottom: .5rem;
+    }
+
+    .ethic p {
+      font-size: .925rem;
+      color: #b8b4aa;
+      line-height: 1.7;
+    }
+
+    .projects-grid {
+      display: grid;
+      gap: 1.75rem;
+    }
+
+    .project-card {
+      background: rgba(237,232,220,.04);
+      border: 1px solid rgba(237,232,220,.1);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: border-color .2s;
+    }
+
+    .project-card:hover { border-color: rgba(110,205,192,.35); }
+
+    .project-card .tag {
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: .75rem;
+    }
+
+    .project-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.5rem;
+      color: var(--cream);
+      margin-bottom: .6rem;
+    }
+
+    .project-card p {
+      font-size: .9rem;
+      color: #b8b4aa;
+      line-height: 1.7;
+      margin-bottom: 1.25rem;
+    }
+
+    .project-card a {
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--mint);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(110,205,192,.3);
+      padding-bottom: 1px;
+      transition: border-color .2s;
+    }
+
+    .project-card a:hover { border-color: var(--mint); }
+
+    .todo-note {
+      display: inline-block;
+      margin-top: .5rem;
+      padding: .3rem .75rem;
+      background: rgba(110,205,192,.08);
+      border: 1px dashed rgba(110,205,192,.3);
+      border-radius: 3px;
+      font-size: .75rem;
+      color: var(--mint);
+      letter-spacing: .06em;
+    }
+
+    .resume-block {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .resume-block p {
+      font-size: .95rem;
+      color: #b8b4aa;
+      max-width: 480px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: .75rem 1.75rem;
+      background: var(--mint);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .8rem;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: opacity .2s;
+    }
+
+    .btn:hover { opacity: .85; }
+
+    footer {
+      padding: 2.5rem;
+      border-top: 1px solid rgba(237,232,220,.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer p {
+      font-size: .8rem;
+      color: var(--gray);
+    }
+
+    footer a {
+      color: var(--gray);
+      text-decoration: none;
+      font-size: .8rem;
+      transition: color .2s;
+    }
+
+    footer a:hover { color: var(--cream); }
+
+    @media (max-width: 600px) {
+      nav, .hero, section, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .resume-block { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="https://parkerbradley.xyz">PB8</a>
+    <a class="back" href="https://parkerbradley.xyz">← parkerbradley.xyz</a>
+  </nav>
+
+  <div class="hero">
+    <p class="label">SMSC Class Portfolio</p>
+    <h1>OK State</h1>
+    <p>Code of ethics, class work, a few things I'm proud of from four years at Oklahoma State. This page is for the SMSC elevator pitch assignment. Not the main show.</p>
+  </div>
+
+  <section id="ethics">
+    <p class="section-label">Personal Code of Ethics</p>
+    <div class="ethics-grid">
+
+      <div class="ethic">
+        <h3>Truth comes first.</h3>
+        <p>I don't publish what I can't stand behind. If the data doesn't support it, the claim doesn't make it into the caption, the press release or the pitch. Metrics I share are real. The work has to be honest.</p>
+      </div>
+
+      <div class="ethic">
+        <h3>Transparency over spin.</h3>
+        <p>If a campaign underperformed, I say so and explain why. Spinning a miss into a win doesn't serve the client, the audience or me. Accountability is how you actually get better.</p>
+      </div>
+
+      <div class="ethic">
+        <h3>Audiences aren't targets. They're people.</h3>
+        <p>The people on the other end of my content have real lives and limited attention. I don't manipulate it. I earn it. That means creating something actually worth their time.</p>
+      </div>
+
+      <div class="ethic">
+        <h3>AI must serve, not shortcut.</h3>
+        <p>I build with AI every day. That means I'm responsible for what comes out. Not the model. AI pushes my thinking further. It doesn't replace my judgment. I verify. I edit. I own the output.</p>
+      </div>
+
+      <div class="ethic">
+        <h3>Protect what's private.</h3>
+        <p>Client data, audience analytics, performance numbers. None of that is mine to spread around. I treat it carefully. What isn't mine to share doesn't get shared.</p>
+      </div>
+
+      <div class="ethic">
+        <h3>Represent the profession well.</h3>
+        <p>Communications work shapes how people see the world. That's real influence and not something to throw around. I don't lend it to work I think causes harm, no matter what the opportunity looks like.</p>
+      </div>
+
+      <div class="ethic">
+        <h3>Keep learning.</h3>
+        <p>The industry moves fast. What worked last year may not work today. I stay curious, stay critical and don't mistake confidence for expertise.</p>
+      </div>
+
+      <div class="ethic">
+        <h3>Be consistent when no one's watching.</h3>
+        <p>This isn't a public statement. It's a standard I hold myself to whether or not anyone's evaluating it.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projects">
+    <p class="section-label">Class Projects</p>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <p class="tag"><!-- TODO: course name e.g. "MCOM 3413 · Strategic Writing" --></p>
+        <h3><!-- TODO: Project Title --></h3>
+        <p><!-- TODO: 2-3 sentences. What was the assignment? What did you create? What was the result? --></p>
+        <span class="todo-note">→ Add project file or link</span>
+      </div>
+
+      <div class="project-card">
+        <p class="tag"><!-- TODO: course name --></p>
+        <h3><!-- TODO: Project Title --></h3>
+        <p><!-- TODO: 2-3 sentences --></p>
+        <span class="todo-note">→ Add project file or link</span>
+      </div>
+
+      <div class="project-card">
+        <p class="tag"><!-- TODO: course name --></p>
+        <h3><!-- TODO: Project Title --></h3>
+        <p><!-- TODO: 2-3 sentences --></p>
+        <span class="todo-note">→ Add project file or link</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="resume">
+    <p class="section-label">Resume</p>
+    <div class="resume-block">
+      <p>Updated April 2026. Covers everything from Stan Clark and OSU Athletics up through my new role at Krush Advertising in OKC.</p>
+      <a class="btn" href="/assets/docs/resume.pdf" target="_blank">Download Resume (PDF)</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Parker Bradley</p>
+    <a href="https://parkerbradley.xyz">← Back to main portfolio</a>
+  </footer>
+
+</body>
+</html>
