@@ -170,8 +170,26 @@
       gap: .4rem;
     }
 
+    .work-img-item--mag {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .work-img-item--mag img {
+      width: 60%;
+      flex-shrink: 0;
+    }
+
     .work-img-item--rack {
-      max-width: 50%;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .work-img-item--rack img {
+      width: 50%;
+      flex-shrink: 0;
     }
 
     .work-img-item img {
@@ -377,7 +395,7 @@
               <span class="media-caption-desc">Typography exploration featuring Badaboom, a bold display font.</span>
             </div>
           </div>
-          <div class="work-img-item">
+          <div class="work-img-item work-img-item--mag">
             <img src="/assets/img/ParkerBradleyMagCoverDraft4.jpg" alt="Magazine cover project">
             <div class="media-caption">
               <span class="media-caption-title">Magazine Cover</span>
