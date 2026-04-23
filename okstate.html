@@ -159,21 +159,18 @@
     }
 
     .work-images {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      flex-direction: column;
       gap: .75rem;
-      align-items: start;
     }
 
     .work-img-item {
       display: flex;
       flex-direction: column;
       gap: .4rem;
-      align-self: start;
     }
 
-    .work-img-item:last-child {
-      grid-column: 1 / -1;
+    .work-img-item--rack {
       max-width: 50%;
     }
 
@@ -353,8 +350,23 @@
       </div>
     </div>
 
-    <!-- RIGHT: Class Work + Resume -->
+    <!-- RIGHT: Resume + Class Work -->
     <div class="col col-work">
+      <div>
+        <p class="col-label">Resume</p>
+        <div class="resume-row">
+          <div class="resume-preview">
+            <a href="/assets/docs/resume.pdf" target="_blank">
+              <img src="/assets/img/resume.pdf.png" alt="Parker Bradley resume preview">
+            </a>
+          </div>
+          <div class="resume-meta">
+            <p>Updated March 2026, prior to accepting the position at Krush Advertising in Oklahoma City.</p>
+            <a class="btn" href="/assets/docs/resume.pdf" target="_blank">Download PDF</a>
+          </div>
+        </div>
+      </div>
+
       <div>
         <p class="col-label">Class Work</p>
         <div class="work-images">
@@ -372,27 +384,12 @@
               <span class="media-caption-desc">Editorial cover design built for a class publication project.</span>
             </div>
           </div>
-          <div class="work-img-item">
+          <div class="work-img-item work-img-item--rack">
             <img src="/assets/img/ParkerBradleyRackCardDraftVer4.jpg" alt="Rack card project">
             <div class="media-caption">
               <span class="media-caption-title">Event Rack Card</span>
               <span class="media-caption-desc">Print collateral promoting a Zach Bryan concert, created as a class project.</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <p class="col-label">Resume</p>
-        <div class="resume-row">
-          <div class="resume-preview">
-            <a href="/assets/docs/resume.pdf" target="_blank">
-              <img src="/assets/img/resume.pdf.png" alt="Parker Bradley resume preview">
-            </a>
-          </div>
-          <div class="resume-meta">
-            <p>Updated March 2026, prior to accepting the position at Krush Advertising in Oklahoma City.</p>
-            <a class="btn" href="/assets/docs/resume.pdf" target="_blank">Download PDF</a>
           </div>
         </div>
       </div>
