@@ -66,7 +66,7 @@
     /* ── THREE-COLUMN GRID ── */
     .page-grid {
       display: grid;
-      grid-template-columns: 200px 0.85fr 1fr;
+      grid-template-columns: 200px 0.65fr 1fr;
       flex: 1;
       overflow: hidden;
     }
@@ -162,12 +162,19 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: .75rem;
+      align-items: start;
     }
 
     .work-img-item {
       display: flex;
       flex-direction: column;
       gap: .4rem;
+      align-self: start;
+    }
+
+    .work-img-item:last-child {
+      grid-column: 1 / -1;
+      max-width: 50%;
     }
 
     .work-img-item img {
@@ -175,7 +182,6 @@
       height: auto;
       display: block;
       border-radius: 3px;
-      border: 1px solid rgba(237,232,220,.08);
     }
 
     .media-caption-title {
