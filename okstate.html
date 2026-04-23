@@ -66,7 +66,7 @@
     /* ── THREE-COLUMN GRID ── */
     .page-grid {
       display: grid;
-      grid-template-columns: 200px 1fr 1fr;
+      grid-template-columns: 200px 0.85fr 1fr;
       flex: 1;
       overflow: hidden;
     }
@@ -160,55 +160,39 @@
 
     .work-images {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: .5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .75rem;
     }
 
     .work-img-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 3px;
-      border: 1px solid rgba(237,232,220,.08);
-      transition: border-color .2s;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
     }
-
-    .work-img-item:hover { border-color: rgba(110,205,192,.35); }
 
     .work-img-item img {
       width: 100%;
       height: auto;
       display: block;
+      border-radius: 3px;
+      border: 1px solid rgba(237,232,220,.08);
     }
-
-    .work-img-item .media-caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 2rem 1rem .75rem;
-      background: linear-gradient(to top, rgba(12,12,12,.82) 0%, transparent 100%);
-      opacity: 0;
-      transition: opacity .25s ease;
-      pointer-events: none;
-    }
-
-    .work-img-item:hover .media-caption { opacity: 1; }
 
     .media-caption-title {
       display: block;
-      font-size: .78rem;
+      font-size: .63rem;
       font-weight: 500;
-      color: #EDE8DC;
-      letter-spacing: .05em;
+      color: var(--mint);
       text-transform: uppercase;
+      letter-spacing: .08em;
     }
 
     .media-caption-desc {
       display: block;
-      font-size: .72rem;
-      color: rgba(237,232,220,.5);
-      margin-top: .2rem;
-      line-height: 1.4;
+      font-size: .62rem;
+      color: var(--gray);
+      margin-top: .1rem;
+      line-height: 1.35;
     }
 
     .resume-row {
