@@ -164,16 +164,52 @@
       gap: .5rem;
     }
 
-    .work-images img {
-      width: 100%;
-      height: auto;
-      display: block;
+    .work-img-item {
+      position: relative;
+      overflow: hidden;
       border-radius: 3px;
       border: 1px solid rgba(237,232,220,.08);
       transition: border-color .2s;
     }
 
-    .work-images img:hover { border-color: rgba(110,205,192,.35); }
+    .work-img-item:hover { border-color: rgba(110,205,192,.35); }
+
+    .work-img-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .work-img-item .media-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem 1rem .75rem;
+      background: linear-gradient(to top, rgba(12,12,12,.82) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity .25s ease;
+      pointer-events: none;
+    }
+
+    .work-img-item:hover .media-caption { opacity: 1; }
+
+    .media-caption-title {
+      display: block;
+      font-size: .78rem;
+      font-weight: 500;
+      color: #EDE8DC;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .media-caption-desc {
+      display: block;
+      font-size: .72rem;
+      color: rgba(237,232,220,.5);
+      margin-top: .2rem;
+      line-height: 1.4;
+    }
 
     .resume-row {
       display: flex;
@@ -288,7 +324,7 @@
         <h1>Parker<br>Bradley</h1>
       </div>
       <div class="identity-bottom">
-        <p>Marketing &amp; Communications<br>Oklahoma State University</p>
+        <p>Marketing and Communications<br>Oklahoma State University</p>
         <br>
         <p><a href="mailto:parkbrad08@gmail.com">parkbrad08@gmail.com</a></p>
       </div>
@@ -332,9 +368,27 @@
       <div>
         <p class="col-label">Class Work</p>
         <div class="work-images">
-          <img src="/assets/img/ParkerBradleyFontPosterDraftVer6.jpg" alt="Font poster project">
-          <img src="/assets/img/ParkerBradleyMagCoverDraft4.jpg" alt="Magazine cover project">
-          <img src="/assets/img/ParkerBradleyRackCardDraftVer4.jpg" alt="Rack card project">
+          <div class="work-img-item">
+            <img src="/assets/img/ParkerBradleyFontPosterDraftVer6.jpg" alt="Font poster project">
+            <div class="media-caption">
+              <span class="media-caption-title">Font Study</span>
+              <span class="media-caption-desc">Typography exploration featuring Badaboom, a bold display font.</span>
+            </div>
+          </div>
+          <div class="work-img-item">
+            <img src="/assets/img/ParkerBradleyMagCoverDraft4.jpg" alt="Magazine cover project">
+            <div class="media-caption">
+              <span class="media-caption-title">Magazine Cover</span>
+              <span class="media-caption-desc">Editorial cover design built for a class publication project.</span>
+            </div>
+          </div>
+          <div class="work-img-item">
+            <img src="/assets/img/ParkerBradleyRackCardDraftVer4.jpg" alt="Rack card project">
+            <div class="media-caption">
+              <span class="media-caption-title">Event Rack Card</span>
+              <span class="media-caption-desc">Print collateral promoting a Zach Bryan concert, created as a class project.</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -347,7 +401,7 @@
             </a>
           </div>
           <div class="resume-meta">
-            <p>Updated March 2026, prior to accepting the position at Krush Advertising in OKC.</p>
+            <p>Updated March 2026, prior to accepting the position at Krush Advertising in Oklahoma City.</p>
             <a class="btn" href="/assets/docs/resume.pdf" target="_blank">Download PDF</a>
           </div>
         </div>
